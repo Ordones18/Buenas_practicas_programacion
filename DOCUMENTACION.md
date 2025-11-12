@@ -13,7 +13,7 @@ Este proyecto compara dos implementaciones para buscar números primos en el ran
 
 El objetivo de la optimización fue reducir el tiempo de ejecución manteniendo la exactitud de los resultados.
 
-![Rama de trabajo optimización-codigo](imagenes/figura1.png)
+![Rama de trabajo optimización-codigo](imagenes/figura1.jpg)
 
 ---
 
@@ -39,7 +39,7 @@ Se implementaron diversas técnicas de optimización que permitieron mejorar sig
 
 ### Código Original
 
-![Resultados código original](imagenes/figura2.png)
+![Resultados código original](imagenes/figura2.jpg)
 
 En las mediciones del código original se obtuvo la siguiente evidencia:
 - Se encontraron **9592 números primos** en el rango 1 a 100000.
@@ -52,13 +52,13 @@ La función `es_primo` consumió la mayor parte del tiempo de ejecución:
 
 Esto indica que prácticamente todo el coste de la ejecución se consumía verificando divisores con un algoritmo que probaba hasta n-1.
 
-![Resultados de Profiling_original](imagenes/figura3.png)
+![Resultados de Profiling_original](imagenes/figura3.jpg)
 
 Esta información permite concluir que la estrategia de verificación de primalidad del código original es extremadamente ineficiente para el dominio evaluado. El alto número de llamadas y el gran `tottime` asociado a `es_primo` muestran que la complejidad por número convierte el proceso en algo impracticable para límites grandes.
 
 ### Código Optimizado
 
-![Resultados código optimizado](imagenes/figura4.png)
+![Resultados código optimizado](imagenes/figura4.jpg)
 
 **Salida del código optimizado:**
 
@@ -73,13 +73,13 @@ La función `es_primo_optimizado`:
 
 Esto refleja que cada verificación es mucho más económica gracias a limitar las comprobaciones hasta la raíz cuadrada de n y evitar pares.
 
-![Resultados Profiling_optimizado](imagenes/figura5.png)
+![Resultados Profiling_optimizado](imagenes/figura5.jpg)
 
 El perfil muestra también tiempo extra por cargar e inicializar NumPy y por llamadas internas, por eso el número total de llamadas puede subir, aunque el tiempo principal baje mucho. La mayor mejora viene de cambiar el algoritmo: verificar solo hasta √n, no probar pares y usar list comprehensions.
 
 ### Comparación de tiempos
 
-![Resultados comparativos original vs optimizado](imagenes/figura6.png)
+![Resultados comparativos original vs optimizado](imagenes/figura6.jpg)
 
 **Resultados comparativos:**
 - Código original: **45.47 segundos**
@@ -92,7 +92,7 @@ El perfil muestra también tiempo extra por cargar e inicializar NumPy y por lla
 
 La comparación muestra una mejora drástica: el código original tarda aproximadamente 45.7 segundos mientras que la versión optimizada registra tiempos alrededor de 0.28 segundos, es decir, una aceleración del orden de 150x–260x según la medición usada. Ambos scripts devuelven los mismos 9592 primos, por lo que la optimización no altera la corrección. Esta ganancia proviene sobre todo de cambios algorítmicos; la sobrecarga de librerías como NumPy es pequeña frente al ahorro obtenido.
 
-![Gráficas de comparación de los tiempos](imagenes/figura7.png)
+![Gráficas de comparación de los tiempos](imagenes/figura7.jpg)
 
 La gráfica muestra los tiempos de ejecución del código original frente al código optimizado para buscar primos hasta 100000. La barra roja representa el tiempo del código original y la verde el tiempo optimizado. Como se ve, la versión optimizada reduce drásticamente el tiempo de ejecución. Esto se debe principalmente a cambiar el algoritmo de verificación y a usar un código más eficiente en Python.
 
